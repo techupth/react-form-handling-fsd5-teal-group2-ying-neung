@@ -1,4 +1,17 @@
+import { useState } from "react";
+
 function ProductForm() {
+  const [nameInput,displayName] = useState("")
+  const [priceInput,displayPrice] = useState("")
+  const [imageInput,displayImage] = useState("")
+  const [descriptionInput,displayDescription] = useState("")
+ 
+  function handleSubmit(e) {
+    e.preventDefault();
+    const objectProduct = {name:nameInput , price:priceInput , image:imageInput , description:descriptionInput}
+    alert(`{name:${nameInput }, price:${priceInput} , image:${imageInput} , description:${descriptionInput}}`)
+  }
+  
   return (
     <form className="post-form">
       <h1>Create Product Form</h1>
@@ -10,7 +23,8 @@ function ProductForm() {
             name="name"
             type="text"
             placeholder="Enter name here"
-            onChange={() => {}}
+            onChange={(e) => { displayName(e.target.value)}}
+            value={nameInput}
           />
         </label>
       </div>
@@ -22,7 +36,8 @@ function ProductForm() {
             name="image"
             type="text"
             placeholder="Enter image url here"
-            onChange={() => {}}
+            onChange={(e) => {displayImage(e.target.value)}}
+            value={imageInput}
           />
         </label>
       </div>
@@ -34,7 +49,8 @@ function ProductForm() {
             name="price"
             type="number"
             placeholder="Enter price here"
-            onChange={() => {}}
+            onChange={(e) => {displayPrice(e.target.value)}}
+            value={priceInput}
           />
         </label>
       </div>
@@ -46,17 +62,28 @@ function ProductForm() {
             name="description"
             type="text"
             placeholder="Enter description here"
-            onChange={() => {}}
+            onChange={(e) => {displayDescription(e.target.value)}}
+            value={descriptionInput}
             rows={4}
             cols={30}
           />
         </label>
       </div>
+
       <div className="form-actions">
-        <button type="submit">Create</button>
+        <button type="submit" onClick={handleSubmit}>Create</button>
+
+{/* <button type="submit" onClick={(e)=>{e.preventDefault()
+        const objectProduct = {name:nameInput , price:priceInput , image:imageInput , description:descriptionInput}
+        alert(JSON.stringify(objectProduct))}}>Create</button> */}
       </div>
     </form>
   );
 }
+
+
+
+
+
 
 export default ProductForm;
